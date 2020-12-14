@@ -1,0 +1,6 @@
+todo_*
+
+__pycache__/
+.pytest_cache
+
+.elixir_ls
