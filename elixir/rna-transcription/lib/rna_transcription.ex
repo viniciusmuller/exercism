@@ -9,11 +9,15 @@ defmodule RnaTranscription do
   """
   @spec to_rna([char]) :: [char]
   def to_rna(dna) do
-    Enum.map(dna, &rna/1)
-    |> List.to_charlist
+    # I think this is more efficient, i don't know exactly how the garbage
+    # collector performs in this situation, but i think this is doing just the
+    # same as a single Enum.map, creating a new list each iteration.
+    Enum.reduce(dna, [], fn char, accumulator ->
+       accumulator ++ do_rna(char)
+    end)
   end
 
-  defp rna(c) do
+  defp do_rna(c) do
     case c do
       ?G -> 'C'
       ?C -> 'G'
