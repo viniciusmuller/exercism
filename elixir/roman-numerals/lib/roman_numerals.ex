@@ -18,14 +18,13 @@ defmodule RomanNumerals do
     1 => "I"
   }
 
+  def numeral(0), do: ""
+
   @spec numeral(pos_integer) :: String.t()
   def numeral(number) do
-    case number do
-      0 -> ""
-      _ -> num = Map.keys(@numerals)
-          |> Enum.reverse()
-          |> Enum.find(&(&1 <= number))
-          Map.get(@numerals, num) <> numeral(number - num)
-    end
+    num = Map.keys(@numerals)
+    |> Enum.sort(:desc)
+    |> Enum.find(&(&1 <= number))
+    Map.get(@numerals, num) <> numeral(number - num)
   end
 end
