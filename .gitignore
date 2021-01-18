@@ -3,4 +3,7 @@ todo_*
 __pycache__/
 .pytest_cache
 
+_build
+
 .elixir_ls
+
