@@ -4,7 +4,7 @@
 
 
 steps(N) when N =< 0 ->
-  {error, badarg};
+  error(badarg);
 steps(N) ->
   steps(N, 0).
 
