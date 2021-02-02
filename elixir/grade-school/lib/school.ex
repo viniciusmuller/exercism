@@ -12,7 +12,9 @@ defmodule School do
   def add(db, name, grade) do
     # The callback is called if the key already exists
     # if it exists, we append it to the grade students
-    Map.update(db, grade, [name], fn students -> [name | students] end)
+    Map.update(db, grade, [name],
+      fn students -> [name | students] end
+    )
   end
 
   @doc """
@@ -31,6 +33,10 @@ defmodule School do
     # Converting it into a keyword list
     db
     |> Map.to_list()
-    |> Enum.map(fn {grade, students} -> {grade, Enum.sort(students)} end)
+    |> Enum.map(&sort_students/1)
+  end
+
+  defp sort_students({grade, students}) do
+    {grade, Enum.sort(students)}
   end
 end

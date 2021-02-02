@@ -1,4 +1,20 @@
 defmodule BeerSong do
+  @doc """
+  Get a single verse of the beer song
+  """
+  @spec verse(integer) :: String.t()
+  def verse(number) do
+    generate_beer(number)
+  end
+
+  @doc """
+  Get the entire beer song for a given range of numbers of bottles.
+  """
+  @spec lyrics(Range.t()) :: String.t()
+  def lyrics(range \\ 99..0) do
+   Enum.map_join(range, "\n", &generate_beer/1)
+  end
+
   defp generate_beer(n) do
     s = n >= 0 and n != 1 && "s" || ""
     b = n == 0 && "no more" || n
@@ -18,21 +34,5 @@ defmodule BeerSong do
     one = n == 0 && "it" || "one"
     n = n == 0 && "no more" || n
     "Take #{one} down and pass it around, #{n} bottle#{s} of beer on the wall.\n"
-  end
-
-  @doc """
-  Get a single verse of the beer song
-  """
-  @spec verse(integer) :: String.t()
-  def verse(number) do
-    generate_beer(number)
-  end
-
-  @doc """
-  Get the entire beer song for a given range of numbers of bottles.
-  """
-  @spec lyrics(Range.t()) :: String.t()
-  def lyrics(range \\ 99..0) do
-   Enum.map_join(range, "\n", &generate_beer/1)
   end
 end

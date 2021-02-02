@@ -14,9 +14,9 @@ defmodule Pangram do
   @spec pangram?(String.t()) :: boolean
   def pangram?(sentence) do
     sentence
-    |> String.downcase
-    |> String.to_charlist
-    |> Enum.uniq
+    |> String.downcase()
+    |> String.to_charlist()
+    |> Enum.uniq()
     |> Enum.count(&(&1 in ?a..?z)) == 26
   end
 end

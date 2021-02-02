@@ -9,14 +9,18 @@ defmodule RotationalCipher do
   @spec rotate(text :: String.t(), shift :: integer) :: String.t()
   def rotate(text, shift) do
     text
-      |> to_charlist
-      |> Enum.map(fn c ->
-        cond do
-          c in ?A..?Z -> rem((c - ?A + shift), 26) + ?A
-          c in ?a..?z -> rem((c - ?a + shift), 26) + ?a
-          true -> c
-        end
-      end)
-      |> to_string
+      |> to_charlist()
+      |> Enum.map(&rotate_char(&1, shift))
+      |> to_string()
   end
+
+  defp rotate_char(char, shift) when char in ?A..?Z do
+    rem((char - ?A + shift), 26) + ?A
+  end
+
+  defp rotate_char(char, shift) when char in ?a..?z do
+    rem((char - ?a + shift), 26) + ?a
+  end
+
+  defp rotate_char(char, _shift), do: char
 end
