@@ -7,3 +7,5 @@ _build
 
 .elixir_ls
 
+.stack-work
+
